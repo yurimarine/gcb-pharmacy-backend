@@ -14,14 +14,16 @@ return new class extends Migration
             $table->unsignedBigInteger('generic_id')->nullable();
             $table->unsignedBigInteger('supplier_id')->nullable();
             $table->unsignedBigInteger('manufacturer_id')->nullable();
-            $table->string('brand_name')->unique();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('sku')->unique()->nullable();
+            $table->string('brand_name');
             $table->string('dosage_form')->nullable();
-            $table->string('dosage_amount')->nullable();
+            $table->decimal('dosage_amount',8,2)->nullable();
+            $table->string('dosage_unit')->nullable();
             $table->string('packaging_type')->nullable();
-            $table->integer('volume_amount')->nullable();
+            $table->decimal('volume_amount',8,2)->nullable();
             $table->string('volume_unit')->nullable();
-            $table->integer('unit_cost')->default(0);
+            $table->decimal('unit_cost',8,2)->default(0);
             $table->string('barcode')->unique()->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
@@ -38,7 +40,11 @@ return new class extends Migration
         ->references('id')
         ->on('manufacturers')
         ->onDelete('set null');
-        });
+        $table->foreign('category_id')
+        ->references('id')
+        ->on('categories')
+        ->onDelete('set null');
+       });
     }
 
     public function down(): void
