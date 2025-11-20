@@ -10,10 +10,12 @@ class Product extends Model
         'generic_id',
         'supplier_id',
         'manufacturer_id',
+        'category_id',
         'brand_name',
         'sku',
         'dosage_form',
         'dosage_amount',
+        'dosage_unit',
         'packaging_type',
         'volume_amount',
         'volume_unit',
@@ -24,6 +26,10 @@ class Product extends Model
     public function generic()
     {
         return $this->belongsTo(Generic::class);
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
     public function supplier()
     {

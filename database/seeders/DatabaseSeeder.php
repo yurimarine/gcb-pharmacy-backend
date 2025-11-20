@@ -9,6 +9,7 @@ use App\Models\Pharmacy;
 use App\Models\Product;
 use App\Models\Inventory;
 use App\Models\Supplier;
+use App\Models\Category;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -122,57 +123,89 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        Category::firstOrCreate(
+            ['name' => 'Pain Relievers'],
+            [
+            'description' => 'Leading pharmaceutical company in the Philippines.'
+            ]
+        );
+
+        Category::firstOrCreate(
+            ['name' => 'Analgesic'],
+            [
+            'description' => 'Leading pharmaceutical company in the Philippines.'
+            ]
+        );
+
+        Category::firstOrCreate(
+            ['name' => 'Antibiotics'],
+            [
+            'description' => 'Leading pharmaceutical company in the Philippines.'
+            ]
+        );
+
+
 
         Product::firstOrCreate(
             ['barcode' => '1234567890123'],
             [
-                'generic_id' => 1, // Paracetamol
+                'generic_id' => 1,
                 'supplier_id' => 1,
-                'manufacturer_id' => 1, // Pfizer
+                'manufacturer_id' => 1,
+                'category_id' => 1,
                 'brand_name' => 'Paracetamol',
                 'dosage_form' => 'Tablet',
-                'dosage_amount' => '500mg',
+                'dosage_amount' => '500',
+                'dosage_unit' => 'mg',
                 'packaging_type' => 'Box',
                 'volume_amount' => 10,
                 'volume_unit' => 'pcs',
                 'unit_cost' => 5.50,
-                'description' => 'Paracetamol tablets for fever and pain relief'
+                'description' => 'Paracetamol tablets for fever and pain relief',
+                'sku' => 'SKU-PARA-500'
             ]
         );
 
         Product::firstOrCreate(
             ['barcode' => '2345678901234'],
             [
-                'generic_id' => 2, // Ibuprofen
+                'generic_id' => 2,
                 'supplier_id' => 2,
-                'manufacturer_id' => 2, // Unilab
+                'manufacturer_id' => 2,
+                'category_id' => 2,
                 'brand_name' => 'Ibuprofen',
                 'dosage_form' => 'Capsule',
-                'dosage_amount' => '200mg',
+                'dosage_amount' => '200',
+                'dosage_unit' => 'mg',
                 'packaging_type' => 'Box',
                 'volume_amount' => 20,
                 'volume_unit' => 'pcs',
                 'unit_cost' => 8.75,
-                'description' => 'Ibuprofen capsules for inflammation and pain relief'
+                'description' => 'Ibuprofen capsules for inflammation and pain relief',
+                'sku' => 'SKU-IBU-200'
             ]
         );
 
         Product::firstOrCreate(
             ['barcode' => '3456789012345'],
             [
-                'generic_id' => 3, // Amoxicillin
+                'generic_id' => 3,
                 'supplier_id' => 3,
-                'manufacturer_id' => 3, // Johnson & Johnson
+                'manufacturer_id' => 3,
+                'category_id' => 2,
                 'brand_name' => 'Amoxicillin',
                 'dosage_form' => 'Capsule',
-                'dosage_amount' => '500mg',
+                'dosage_amount' => '500',
+                'dosage_unit' => 'mg',
                 'packaging_type' => 'Bottle',
                 'volume_amount' => 30,
                 'volume_unit' => 'pcs',
                 'unit_cost' => 15.00,
-                'description' => 'Amoxicillin capsules for bacterial infections'
+                'description' => 'Amoxicillin capsules for bacterial infections',
+                'sku' => 'SKU-AMOX-500'
             ]
         );
+
 
         Inventory::firstOrCreate(
             ['product_id' => 1, 'pharmacy_id' => 1],

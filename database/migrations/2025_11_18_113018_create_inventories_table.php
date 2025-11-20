@@ -15,9 +15,9 @@ return new class extends Migration
             $table->unsignedBigInteger('pharmacy_id');
             $table->integer('stock_quantity')->default(0);
             $table->integer('reorder_quantity')->default(0);
-            $table->date('expiry_date')->nullable();
-            $table->integer('markup_percentage')->default(0);
-            $table->integer('selling_price')->default(0);
+            $table->date('expiry_date')->nullable()->default(null);
+            $table->decimal('markup_percentage', 8, 2)->default(0);
+            $table->decimal('selling_price', 8, 2)->default(0);
             $table->timestamps();
 
         $table->foreign('product_id')
