@@ -75,10 +75,16 @@ class ProductController extends Controller
         }
     }
 
-    public function deleteGeneric($id)
+    public function deleteProduct($id)
     {
         $product = $this->productRepository->deleteProduct($id);
         return $this->response->success($product, "Product successfully deleted", 200);
+    }
+
+    public function getProducts()
+    {
+        $products = $this->productRepository->getProducts();
+        return $this->response->success($products, "Products retrieved successfully", 200);
     }
 
 }

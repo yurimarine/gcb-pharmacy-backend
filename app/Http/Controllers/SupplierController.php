@@ -75,9 +75,9 @@ class SupplierController extends Controller
 
     }
 
-    public function fetchSuppliers(Request $request)
+    public function getSuppliers(Request $request)
     {
-        $suppliers = $this->supplierRepo->fetch($request);
+        $suppliers = $this->supplierRepo->getSuppliers($request);
         return response()->json([
             'data' => $suppliers
         ]);

@@ -39,4 +39,9 @@ class CategoryRepository extends BaseRepositoryInterface
         return (bool) $category->delete();
     }
 
+    public function getCategories(Request $request)
+    {
+        return $this->model->get();
+    }
+
 }

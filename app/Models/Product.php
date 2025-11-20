@@ -27,9 +27,9 @@ class Product extends Model
     {
         return $this->belongsTo(Generic::class);
     }
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
     public function supplier()
     {

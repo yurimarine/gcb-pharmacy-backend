@@ -72,9 +72,9 @@ class ManufacturerController extends Controller
 
     }
 
-    public function fetchManufacturers(Request $request)
+    public function getManufacturers(Request $request)
     {
-        $manufacturers = $this->manufacturerRepo->fetch($request);
+        $manufacturers = $this->manufacturerRepo->getManufacturers($request);
         return response()->json([
             'data' => $manufacturers
         ]);

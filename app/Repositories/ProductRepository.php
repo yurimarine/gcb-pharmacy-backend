@@ -38,4 +38,14 @@ class ProductRepository extends BaseRepositoryInterface
         $product = $this->model->findOrFail($id);
         return (bool) $product->delete();
     }
+
+    public function getProducts()
+    {
+        return $this->model->with([
+            'generic:id,name',       // select only id and name
+            'category:id,name',      // select only id and name
+            'supplier:id,name',      // select only id and name
+            'manufacturer:id,name'   // select only id and name
+        ])->get();
+    }
 }

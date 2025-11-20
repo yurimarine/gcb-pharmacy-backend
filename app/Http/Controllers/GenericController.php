@@ -72,9 +72,9 @@ class GenericController extends Controller
 
     }
 
-    public function fetchGenerics(Request $request)
+    public function getGenerics(Request $request)
     {
-        $generics = $this->genericRepo->fetch($request);
+        $generics = $this->genericRepo->getGenerics($request);
         return response()->json([
             'data' => $generics
         ]);

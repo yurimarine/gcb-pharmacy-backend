@@ -72,9 +72,9 @@ class CategoryController extends Controller
 
     }
 
-    public function fetchCategories(Request $request)
+    public function getCategories(Request $request)
     {
-        $categories = $this->categoryRepo->fetch($request);
+        $categories = $this->categoryRepo->getCategories($request);
         return response()->json([
             'data' => $categories
         ]);
