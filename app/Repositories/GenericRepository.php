@@ -43,4 +43,9 @@ class GenericRepository extends BaseRepositoryInterface
     {
         return $this->model->get();
     }
+
+    public function getGenericById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
 }

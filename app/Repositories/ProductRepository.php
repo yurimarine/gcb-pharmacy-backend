@@ -52,13 +52,18 @@ class ProductRepository extends BaseRepositoryInterface
         return $product->fresh();
     }
 
-    public function updateProduct(int $id, array $data)
-    {
-        $product = $this->model->findOrFail($id);
-        unset($data['sku']);
-        $product->update($data);
-        return $product->fresh();
-    }
+public function updateProduct(int $id, array $data)
+{
+    $product = $this->model->findOrFail($id);
+    unset($data['sku']);
+    $product->update($data);
+    $product->load(['generic']);
+    $product->sku = $this->generateSku($product);
+    $product->save();
+
+    return $product->fresh();
+}
+
 
     public function deleteProduct(int $id): bool
     {
@@ -74,5 +79,10 @@ class ProductRepository extends BaseRepositoryInterface
             'supplier:id,name',
             'manufacturer:id,name'
         ])->get();
+    }
+
+    public function getProductById(int $id)
+    {
+        return $this->model->findOrFail($id);
     }
 }

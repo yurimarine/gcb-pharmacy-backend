@@ -44,4 +44,9 @@ class SupplierRepository extends BaseRepositoryInterface
         return $this->model->get();
     }
 
+    public function getSupplierById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
 }

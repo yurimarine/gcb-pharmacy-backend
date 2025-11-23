@@ -9,12 +9,12 @@ use App\Helpers\ApiResponse;
 
 class ProductController extends Controller
 {
-    protected $productRepository;
+    protected $productRepo;
     protected $response;
 
-    public function __construct(ProductRepository $productRepository, ApiResponse $response)
+    public function __construct(ProductRepository $productRepo, ApiResponse $response)
     {
-        $this->productRepository = $productRepository;
+        $this->productRepo = $productRepo;
         $this->response = $response;
     }
 
@@ -26,9 +26,9 @@ class ProductController extends Controller
             'manufacturer_id' => 'nullable|exists:manufacturers,id',
             'category_id' => 'nullable|exists:categories,id',
             'brand_name' => 'required|string|max:255',
-            'sku' => 'nullable|string|max:255',
             'dosage_form' => 'nullable|string|max:255',
             'packaging_type' => 'nullable|string|max:255',
+            'packaging_amount' => 'nullable|integer',
             'volume_amount' => 'nullable|numeric:8,2',
             'volume_unit' => 'nullable|string|max:255',
             'unit_cost' => 'nullable|numeric:8,2',
@@ -43,7 +43,7 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
 
-            $product = $this->productRepository->createProduct($validatedData);
+            $product = $this->productRepo->createProduct($validatedData);
 
             DB::commit();
             return $this->response->success($product, 'Product added successfully');
@@ -63,7 +63,7 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
 
-            $product = $this->productRepository->updateProduct($id, $validated);
+            $product = $this->productRepo->updateProduct($id, $validated);
 
             DB::commit();
             return $this->response->success($product, "Product successfully updated", 200);
@@ -75,14 +75,23 @@ class ProductController extends Controller
 
     public function deleteProduct($id)
     {
-        $product = $this->productRepository->deleteProduct($id);
+        $product = $this->productRepo->deleteProduct($id);
         return $this->response->success($product, "Product successfully deleted", 200);
     }
 
     public function getProducts()
     {
-        $products = $this->productRepository->getProducts();
+        $products = $this->productRepo->getProducts();
         return $this->response->success($products, "Products retrieved successfully", 200);
     }
+
+
+    public function getProductById($id)
+    {
+        $product = $this->productRepo->getProductById($id);
+        return $this->response->success($product, "Product retrieved successfully", 200);
+    }
+
+
 
 }

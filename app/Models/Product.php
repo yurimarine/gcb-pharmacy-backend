@@ -15,6 +15,7 @@ class Product extends Model
         'sku',
         'dosage_form',
         'packaging_type',
+        'packaging_amount',
         'volume_amount',
         'volume_unit',
         'unit_cost',

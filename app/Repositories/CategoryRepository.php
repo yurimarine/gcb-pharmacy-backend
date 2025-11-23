@@ -44,4 +44,10 @@ class CategoryRepository extends BaseRepositoryInterface
         return $this->model->get();
     }
 
+
+    public function getCategoryById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
 }

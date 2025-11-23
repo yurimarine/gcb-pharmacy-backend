@@ -80,4 +80,10 @@ class ManufacturerController extends Controller
         ]);
     }
 
+     public function getManufacturerById($id)
+    {
+        $manufacturer = $this->manufacturerRepo->getManufacturerById($id);
+        return $this->response->success($manufacturer, "Manufacturer retrieved successfully", 200);
+    }
+
 }

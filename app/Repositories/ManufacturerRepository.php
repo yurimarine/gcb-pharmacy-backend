@@ -43,4 +43,9 @@ class ManufacturerRepository extends BaseRepositoryInterface
     {
         return $this->model->get();
     }
+
+    public function getManufacturerById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
 }

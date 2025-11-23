@@ -83,4 +83,9 @@ class SupplierController extends Controller
         ]);
     }
 
+    public function getSupplierById($id)
+    {
+        $supplier = $this->supplierRepo->getSupplierById($id);
+        return $this->response->success($supplier, "Supplier retrieved successfully", 200);
+    }
 }
