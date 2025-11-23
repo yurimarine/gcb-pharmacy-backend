@@ -24,7 +24,7 @@ class SupplierController extends Controller
             'name' => 'required|string|max:255',
             'contact_person' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
-            'phone' => 'nullable|digits:11',
+            'phone' => 'nullable|string|min:11|max:11',
             'address' => 'nullable|string|max:255',
         ]);
 

@@ -29,7 +29,7 @@ class InventoryController extends Controller
 
     }
 
-    public function getByPharmacy($pharmacyId)
+    public function getInventoryByPharmacy($pharmacyId)
     {
         $data = $this->inventoryRepository->getInventoryByPharmacy($pharmacyId);
         return $this->response->success($data, "Inventory loaded");

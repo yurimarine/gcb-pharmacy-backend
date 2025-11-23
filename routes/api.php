@@ -58,6 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
             });
             Route::prefix('inventory')->group(function () {
                 Route::put('/update/{pharmacyId}/{productId}', [InventoryController::class, 'updateInventory']);
+                Route::get('/{pharmacy_id}', [InventoryController::class, 'getInventoryByPharmacy']);
             });
         });
 

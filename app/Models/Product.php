@@ -14,8 +14,6 @@ class Product extends Model
         'brand_name',
         'sku',
         'dosage_form',
-        'dosage_amount',
-        'dosage_unit',
         'packaging_type',
         'volume_amount',
         'volume_unit',
