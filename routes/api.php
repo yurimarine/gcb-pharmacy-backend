@@ -63,8 +63,9 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::get('/{id}', [ProductController::class, 'getProductById']);
             });
             Route::prefix('inventory')->group(function () {
-                Route::put('/update/{pharmacyId}/{productId}', [InventoryController::class, 'updateInventory']);
+                Route::put('/update/{pharmacy_id}/{product_id}', [InventoryController::class, 'updateInventory']);
                 Route::get('/{pharmacy_id}', [InventoryController::class, 'getInventoryByPharmacy']);
+                Route::get('/{pharmacy_id}/{product_id}', [InventoryController::class, 'getInventoryById']);
             });
         });
 

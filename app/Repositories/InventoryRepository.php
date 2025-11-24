@@ -47,4 +47,13 @@ class InventoryRepository
             ->where('pharmacy_id', $pharmacyId)
             ->get();
     }
+
+    public function getInventoryById(int $pharmacyId, int $productId)
+    {
+        return $this->model
+            ->with('product')
+            ->where('pharmacy_id', $pharmacyId)
+            ->where('product_id', $productId)
+            ->firstOrFail();
+    }
 }

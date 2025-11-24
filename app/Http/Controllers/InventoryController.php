@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\InventoryRepository;
 use App\Helpers\ApiResponse;
+use Illuminate\Support\Facades\DB;
 
 class InventoryController extends Controller
 {
@@ -23,8 +24,8 @@ class InventoryController extends Controller
             'stock_quantity' => 'nullable|integer',
             'reorder_quantity' => 'nullable|integer',
             'expiry_date' => 'nullable|date',
-            'markup_percentage' => 'nullable|decimal:8,2',
-            'selling_price' => 'nullable|decimal:8,2',
+            'markup_percentage' => 'nullable|numeric:8,2',
+            'selling_price' => 'nullable|numeric:8,2',
         ]);
 
     }
@@ -32,6 +33,12 @@ class InventoryController extends Controller
     public function getInventoryByPharmacy($pharmacyId)
     {
         $data = $this->inventoryRepository->getInventoryByPharmacy($pharmacyId);
+        return $this->response->success($data, "Inventory loaded");
+    }
+
+    public function getInventoryById($pharmacyId, $productId)
+    {
+        $data = $this->inventoryRepository->getInventoryById($pharmacyId, $productId);
         return $this->response->success($data, "Inventory loaded");
     }
 
