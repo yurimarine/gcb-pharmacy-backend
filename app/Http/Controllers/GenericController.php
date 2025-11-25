@@ -72,12 +72,18 @@ class GenericController extends Controller
 
     }
 
-    public function fetchGenerics(Request $request)
+    public function getGenerics(Request $request)
     {
-        $generics = $this->genericRepo->fetch($request);
+        $generics = $this->genericRepo->getGenerics($request);
         return response()->json([
             'data' => $generics
         ]);
+    }
+
+     public function getGenericById ($id)
+    {
+        $generic = $this->genericRepo->getGenericById($id);
+        return $this->response->success($generic, "Generic retrieved successfully", 200);
     }
 
 }

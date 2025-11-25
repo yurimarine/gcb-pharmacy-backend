@@ -39,4 +39,8 @@ class PharmacyRepository extends BaseRepositoryInterface
         return (bool) $pharmacy->delete();
     }
 
+    public function getPharmacies(Request $request)
+    {
+        return $this->model->get();
+    }
 }

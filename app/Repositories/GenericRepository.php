@@ -39,4 +39,13 @@ class GenericRepository extends BaseRepositoryInterface
         return (bool) $generic->delete();
     }
 
+    public function getGenerics(Request $request)
+    {
+        return $this->model->get();
+    }
+
+    public function getGenericById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
 }

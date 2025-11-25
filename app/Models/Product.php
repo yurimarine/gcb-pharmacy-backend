@@ -14,9 +14,8 @@ class Product extends Model
         'brand_name',
         'sku',
         'dosage_form',
-        'dosage_amount',
-        'dosage_unit',
         'packaging_type',
+        'packaging_amount',
         'volume_amount',
         'volume_unit',
         'unit_cost',
@@ -27,9 +26,9 @@ class Product extends Model
     {
         return $this->belongsTo(Generic::class);
     }
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
     public function supplier()
     {

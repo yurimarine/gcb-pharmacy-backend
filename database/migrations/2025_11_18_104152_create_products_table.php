@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('sku')->unique()->nullable();
             $table->string('brand_name');
             $table->string('dosage_form')->nullable();
-            $table->decimal('dosage_amount',8,2)->nullable();
-            $table->string('dosage_unit')->nullable();
             $table->string('packaging_type')->nullable();
+            $table->integer('packaging_amount')->nullable()->default(1);
             $table->decimal('volume_amount',8,2)->nullable();
             $table->string('volume_unit')->nullable();
             $table->decimal('unit_cost',8,2)->default(0);

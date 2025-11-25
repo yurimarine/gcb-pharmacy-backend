@@ -24,7 +24,7 @@ class SupplierController extends Controller
             'name' => 'required|string|max:255',
             'contact_person' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
-            'phone' => 'nullable|digits:11',
+            'phone' => 'nullable|string|min:11|max:11',
             'address' => 'nullable|string|max:255',
         ]);
 
@@ -75,12 +75,17 @@ class SupplierController extends Controller
 
     }
 
-    public function fetchSuppliers(Request $request)
+    public function getSuppliers(Request $request)
     {
-        $suppliers = $this->supplierRepo->fetch($request);
+        $suppliers = $this->supplierRepo->getSuppliers($request);
         return response()->json([
             'data' => $suppliers
         ]);
     }
 
+    public function getSupplierById($id)
+    {
+        $supplier = $this->supplierRepo->getSupplierById($id);
+        return $this->response->success($supplier, "Supplier retrieved successfully", 200);
+    }
 }

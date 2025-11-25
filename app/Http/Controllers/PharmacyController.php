@@ -76,9 +76,9 @@ class PharmacyController extends Controller
 
     }
 
-    public function fetchPharmacies(Request $request)
+    public function getPharmacies(Request $request)
     {
-        $pharmacies = $this->pharmacyRepo->fetch($request);
+        $pharmacies = $this->pharmacyRepo->getPharmacies($request);
         return response()->json([
             'data' => $pharmacies
         ]);

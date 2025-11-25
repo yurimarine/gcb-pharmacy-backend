@@ -39,4 +39,13 @@ class ManufacturerRepository extends BaseRepositoryInterface
         return (bool) $manufacturer->delete();
     }
 
+    public function getManufacturers(Request $request)
+    {
+        return $this->model->get();
+    }
+
+    public function getManufacturerById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
 }

@@ -53,9 +53,7 @@ class CategoryController extends Controller
 
         DB::beginTransaction();
         try {
-
             $category = $this->categoryRepo->updateCategory($id, $validated);
-
             DB::commit();
             return $this->response->success($category, "Category successfully updated", 200);
         } catch (\Exception $e) {
@@ -66,18 +64,22 @@ class CategoryController extends Controller
 
     public function deleteCategory($id)
     {
-
             $category = $this->categoryRepo->deleteCategory($id);
             return $this->response->success($category, "Category successfully deleted", 200);
-
     }
 
-    public function fetchCategories(Request $request)
+    public function getCategories(Request $request)
     {
-        $categories = $this->categoryRepo->fetch($request);
+        $categories = $this->categoryRepo->getCategories($request);
         return response()->json([
             'data' => $categories
         ]);
+    }
+
+    public function getCategoryById($id)
+    {
+        $category = $this->categoryRepo->getCategoryById($id);
+        return $this->response->success($category, "Category retrieved successfully", 200);
     }
 
 }
