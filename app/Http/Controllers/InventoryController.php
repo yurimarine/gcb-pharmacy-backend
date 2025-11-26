@@ -45,23 +45,61 @@ class InventoryController extends Controller
     public function updateInventory(Request $request,$pharmacyId, $productId)
     {
         $validatedData = $this->validateRequest($request);
-
         DB::beginTransaction();
         try {
-
             $inventory = $this->inventoryRepository->updateInventory(
                 $productId,
                 $pharmacyId,
                 $validatedData
             );
-
             DB::commit();
             return $this->response->success($inventory, "Inventory successfully updated", 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->response->error("Failed to update Inventory", 500, $e->getMessage());
         }
-
-
     }
+
+    public function getLowStockByPharmacy($pharmacyId)
+    {
+        $lowStock = $this->inventoryRepository->getLowStockItemsByPharmacy($pharmacyId);
+        return $this->response->success(
+            $lowStock,
+            $lowStock->isEmpty()
+                ? "No low-stock items"
+                : "Low-stock items found"
+        );
+    }
+
+    public function getAllLowStock()
+    {
+        $result = $this->inventoryRepository->getAllLowStock();
+
+        return $this->response->success(
+            $result,
+            "All low-stock inventories retrieved"
+        );
+    }
+
+    public function getExpiredByPharmacy($pharmacyId)
+    {
+        $expired = $this->inventoryRepository->getExpiredItemsByPharmacy($pharmacyId);
+        return $this->response->success(
+            $expired,
+            $expired->isEmpty()
+                ? "No expired items"
+                : "Expired items found"
+        );
+    }
+
+    public function getAllExpired()
+    {
+        $result = $this->inventoryRepository->getAllExpired();
+        return $this->response->success(
+            $result,
+            "All expired inventories retrieved"
+        );
+    }
+
+
 }

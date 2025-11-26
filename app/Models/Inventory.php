@@ -14,6 +14,7 @@ class Inventory extends Model
         'expiry_date',
         'markup_percentage',
         'selling_price',
+        'status',
     ];
     public function product()
     {
