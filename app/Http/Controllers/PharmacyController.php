@@ -84,4 +84,11 @@ class PharmacyController extends Controller
         ]);
     }
 
+    public function getPharmacyById($id)
+    {
+        $pharmacy = $this->pharmacyRepo->getPharmacyById($id);
+        return response()->json([
+            'data' => $pharmacy
+        ]);
+    }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('expiry_date')->nullable()->default(null);
             $table->decimal('markup_percentage', 8, 2)->default(0);
             $table->decimal('selling_price', 8, 2)->default(0);
+            $table->string('status')->default('normal');
             $table->timestamps();
 
         $table->foreign('product_id')

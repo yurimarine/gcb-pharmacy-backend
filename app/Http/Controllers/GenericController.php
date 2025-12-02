@@ -84,6 +84,7 @@ class GenericController extends Controller
     {
         $generic = $this->genericRepo->getGenericById($id);
         return $this->response->success($generic, "Generic retrieved successfully", 200);
+
     }
 
 }

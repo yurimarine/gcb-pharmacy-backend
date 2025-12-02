@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Pharmacy;
+use App\Models\Product;
+use App\Repositories\InventoryRepository;
 use App\Repositories\BaseRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -10,9 +12,10 @@ class PharmacyRepository extends BaseRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Pharmacy $pharmacy)
+    public function __construct(Pharmacy $pharmacy, InventoryRepository $inventoryRepo)
     {
         $this->model = $pharmacy;
+        $this->inventoryRepository = $inventoryRepo;
     }
 
     public function createPharmacy(array $data)
@@ -22,6 +25,11 @@ class PharmacyRepository extends BaseRepositoryInterface
         }
 
         $pharmacy = $this->model->create($data);
+        $products = Product::all();
+
+        foreach ($products as $product) {
+            $this->inventoryRepository->createInventoryByPharmacy($pharmacy->id, $product->id);
+        }
 
         return $pharmacy->fresh();
     }
@@ -42,5 +50,10 @@ class PharmacyRepository extends BaseRepositoryInterface
     public function getPharmacies(Request $request)
     {
         return $this->model->get();
+    }
+
+    public function getPharmacyById(int $id)
+    {
+        return $this->model->findOrFail($id);
     }
 }

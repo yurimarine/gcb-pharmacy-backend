@@ -25,7 +25,7 @@ class ProductController extends Controller
             'supplier_id' => 'nullable|exists:suppliers,id',
             'manufacturer_id' => 'nullable|exists:manufacturers,id',
             'category_id' => 'nullable|exists:categories,id',
-            'brand_name' => 'required|string|max:255',
+            'product_name' => 'required|string|max:255',
             'dosage_form' => 'nullable|string|max:255',
             'packaging_type' => 'nullable|string|max:255',
             'packaging_amount' => 'nullable|integer',

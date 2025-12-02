@@ -9,6 +9,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\BatchController;
 
 
 
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::put('/update/{id}', [PharmacyController::class, 'updatePharmacy']);
                 Route::delete('/delete/{id}', [PharmacyController::class, 'deletePharmacy']);
                 Route::get('/all', [PharmacyController::class, 'getPharmacies']);
+                Route::get('/{id}', [PharmacyController::class, 'getPharmacyById']);
 
             });
             Route::prefix('generic')->group(function () {
@@ -53,7 +55,6 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::delete('/delete/{id}', [SupplierController::class, 'deleteSupplier']);
                 Route::get('/all', [SupplierController::class, 'getSuppliers']);
                 Route::get('/{id}', [SupplierController::class, 'getSupplierById']);
-
             });
             Route::prefix('product')->group(function () {
                 Route::post('/add', [ProductController::class, 'addProduct']);
@@ -63,9 +64,22 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::get('/{id}', [ProductController::class, 'getProductById']);
             });
             Route::prefix('inventory')->group(function () {
+                Route::prefix('low-stock')->group(function () {
+                    Route::get('/all', [InventoryController::class, 'getAllLowStock']);
+                    Route::get('/{pharmacy_id}', [InventoryController::class, 'getLowStockByPharmacy']);
+                });
+                 Route::prefix('expired')->group(function () {
+                    Route::get('/all', [InventoryController::class, 'getAllExpired']);
+                    Route::get('/{pharmacy_id}', [InventoryController::class, 'getExpiredByPharmacy']);
+                });
                 Route::put('/update/{pharmacy_id}/{product_id}', [InventoryController::class, 'updateInventory']);
-                Route::get('/{pharmacy_id}', [InventoryController::class, 'getInventoryByPharmacy']);
                 Route::get('/{pharmacy_id}/{product_id}', [InventoryController::class, 'getInventoryById']);
+                Route::get('/{pharmacy_id}', [InventoryController::class, 'getInventoryByPharmacy']);
+            });
+            Route::prefix('batch')->group(function () {
+                Route::post('/add', [BatchController::class, 'addBatch']);
+                Route::get('/all', [BatchController::class, 'getBatches']);
+                Route::get('/{id}', [BatchController::class, 'getBatchById']);
             });
         });
 

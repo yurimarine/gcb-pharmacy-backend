@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('manufacturer_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('sku')->unique()->nullable();
-            $table->string('brand_name');
+            $table->string('product_name');
             $table->string('dosage_form')->nullable();
             $table->string('packaging_type')->nullable();
             $table->integer('packaging_amount')->nullable()->default(1);
