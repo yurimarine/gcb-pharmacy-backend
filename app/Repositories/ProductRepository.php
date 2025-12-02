@@ -24,7 +24,7 @@ class ProductRepository extends BaseRepositoryInterface
         };
 
         $genericName = $product->generic->name ?? 'GEN';
-        $brandName   = $product->brand_name ?? 'BRAND';
+        $productName   = $product->product_name ?? 'PROD';
         $form        = $product->dosage_form ?? 'FORM';
 
         if ($product->volume_amount && $product->volume_unit) {
@@ -34,12 +34,12 @@ class ProductRepository extends BaseRepositoryInterface
         }
 
         $genericCode = $sanitize(substr($genericName, 0, 4));
-        $brandCode   = $sanitize($brandName);
+        $productCode   = $sanitize($productName);
         $formCode    = $sanitize(substr($form, 0, 3));
         $count    = Product::count() + 1;
         $sequence = str_pad($count, 5, '0', STR_PAD_LEFT);
 
-        return "{$genericCode}-{$brandCode}-{$formCode}-{$volume}-{$sequence}";
+        return "{$genericCode}-{$productCode}-{$formCode}-{$volume}-{$sequence}";
     }
 
     public function createProduct(array $data)

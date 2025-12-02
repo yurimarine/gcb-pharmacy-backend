@@ -11,7 +11,7 @@ class Product extends Model
         'supplier_id',
         'manufacturer_id',
         'category_id',
-        'brand_name',
+        'product_name',
         'sku',
         'dosage_form',
         'packaging_type',
@@ -22,6 +22,17 @@ class Product extends Model
         'barcode',
         'description',
     ];
+
+    public function batches()
+    {
+        return $this->hasMany(Batch::class);
+    }
+
+    public function batchItems()
+    {
+        return $this->hasMany(BatchItem::class);
+    }
+
     public function generic()
     {
         return $this->belongsTo(Generic::class);
@@ -42,4 +53,5 @@ class Product extends Model
     {
         return $this->hasMany(Inventory::class);
     }
+
 }

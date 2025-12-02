@@ -49,7 +49,6 @@ class InventoryRepository
         return $inventory->fresh();
     }
 
-
     private function calculateStatus(array $data): string
     {
         $stock = $data['stock_quantity'] ?? 0;

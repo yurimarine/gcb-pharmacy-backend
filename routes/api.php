@@ -9,6 +9,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\BatchController;
 
 
 
@@ -74,6 +75,11 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::put('/update/{pharmacy_id}/{product_id}', [InventoryController::class, 'updateInventory']);
                 Route::get('/{pharmacy_id}/{product_id}', [InventoryController::class, 'getInventoryById']);
                 Route::get('/{pharmacy_id}', [InventoryController::class, 'getInventoryByPharmacy']);
+            });
+            Route::prefix('batch')->group(function () {
+                Route::post('/add', [BatchController::class, 'addBatch']);
+                Route::get('/all', [BatchController::class, 'getBatches']);
+                Route::get('/{id}', [BatchController::class, 'getBatchById']);
             });
         });
 
