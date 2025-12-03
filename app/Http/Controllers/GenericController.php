@@ -86,5 +86,4 @@ class GenericController extends Controller
         return $this->response->success($generic, "Generic retrieved successfully", 200);
 
     }
-
 }

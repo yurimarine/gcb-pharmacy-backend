@@ -43,12 +43,17 @@ class UserRepository extends BaseRepositoryInterface
         return $this->model->where('email', $email)->first();
     }
 
+    public function findByUsername($username)
+    {
+        return $this->model->where('username', $username)->first();
+    }
+
     public function logIn(array $credentials)
     {
-        $user = $this->findByEmail($credentials['email']);
+        $user = $this->findByUsername($credentials['username']);
 
         if (! $user) {
-            return response()->json(['message' => 'Email not found.'], 404);
+            return response()->json(['message' => 'Username not found.'], 404);
         }
 
         if (! Hash::check($credentials['password'], $user->password)) {

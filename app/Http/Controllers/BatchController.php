@@ -57,7 +57,6 @@ class BatchController extends Controller
             return $this->response->error("Failed to create Batch", 500, $e->getMessage());
 
         }
-
     }
 
     public function getBatches(Request $request)

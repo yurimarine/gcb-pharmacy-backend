@@ -21,14 +21,14 @@ return new class extends Migration
             $table->string('status')->default('normal');
             $table->timestamps();
 
-        $table->foreign('product_id')
-        ->references('id')
-        ->on('products')
-        ->onDelete('cascade');
-        $table->foreign('pharmacy_id')
-        ->references('id')
-        ->on('pharmacies')
-        ->onDelete('cascade');
+            $table->foreign('product_id')
+            ->references('id')
+            ->on('products')
+            ->onDelete('cascade');
+            $table->foreign('pharmacy_id')
+            ->references('id')
+            ->on('pharmacies')
+            ->onDelete('cascade');
         });
     }
 

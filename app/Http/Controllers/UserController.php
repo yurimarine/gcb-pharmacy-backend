@@ -38,7 +38,7 @@ class UserController extends Controller
     public function logIn(Request $request)
     {
         $credentials = $request->validate([
-            'email'    => 'required|email',
+            'username'    => 'required|string',
             'password' => 'required|string',
         ]);
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\TransactionController;
 
 
 
@@ -33,7 +34,6 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::delete('/delete/{id}', [PharmacyController::class, 'deletePharmacy']);
                 Route::get('/all', [PharmacyController::class, 'getPharmacies']);
                 Route::get('/{id}', [PharmacyController::class, 'getPharmacyById']);
-
             });
             Route::prefix('generic')->group(function () {
                 Route::post('/add', [GenericController::class, 'addGeneric']);
@@ -81,6 +81,11 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::get('/all', [BatchController::class, 'getBatches']);
                 Route::get('/{id}', [BatchController::class, 'getBatchById']);
             });
+            Route::prefix('transaction')->group(function () {
+                Route::post('/add/{user_id}/{pharmacy_id}', [TransactionController::class, 'addTransaction']);
+                Route::get('/all', [TransactionController::class, 'getTransactions']);
+                Route::get('/{pharmacy_id}', [TransactionController::class, 'getTransactionByPharmacy']);
+                Route::get('/{pharmacy_id}/{id}', [TransactionController::class, 'getTransactionById']);
+            });
         });
-
 });
