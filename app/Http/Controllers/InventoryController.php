@@ -42,6 +42,13 @@ class InventoryController extends Controller
         return $this->response->success($data, "Inventory loaded");
     }
 
+    public function getInventoryForTerminal($pharmacyId)
+    {
+        $data = $this->inventoryRepository->getInventoryForTerminal($pharmacyId);
+        return $this->response->success($data, "Inventory loaded");
+    }
+
+
     public function updateInventory(Request $request,$pharmacyId, $productId)
     {
         $validatedData = $this->validateRequest($request);

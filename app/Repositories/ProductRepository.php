@@ -81,6 +81,15 @@ public function updateProduct(int $id, array $data)
         ])->get();
     }
 
+    public function getProductsForTerminal()
+    {
+        return $this->model->select(
+            'id', 'sku', 'product_name', 'barcode', 'unit_cost',
+            'packaging_amount', 'volume_amount', 'volume_unit'
+        )->get();
+    }
+
+
     public function getProductById(int $id)
     {
         return $this->model->findOrFail($id);

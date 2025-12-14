@@ -15,6 +15,14 @@ use App\Http\Controllers\TransactionController;
 
 
 Route::post('/login', [UserController::class, 'logIn']);
+Route::prefix('terminal')->group(function () {
+    Route::prefix('product')->group(function () {
+        Route::get('/all', [ProductController::class, 'getProductsForTerminal']);
+    });
+    Route::prefix('inventory')->group(function () {
+        Route::get('/{pharmacy_id}', [InventoryController::class, 'getInventoryForTerminal']);
+    });
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/signup', [UserController::class, 'signUp']);

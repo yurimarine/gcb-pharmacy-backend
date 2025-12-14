@@ -85,6 +85,11 @@ class ProductController extends Controller
         return $this->response->success($products, "Products retrieved successfully", 200);
     }
 
+    public function getProductsForTerminal()
+    {
+        $products = $this->productRepo->getProductsForTerminal();
+        return $this->response->success($products, "Products retrieved successfully", 200);
+    }
 
     public function getProductById($id)
     {

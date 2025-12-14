@@ -26,4 +26,8 @@ class Pharmacy extends Model
     {
         return $this->hasMany(Batch::class);
     }
+    public function inventoryMovements()
+    {
+        return $this->hasMany(InventoryMovement::class);
+    }
 }

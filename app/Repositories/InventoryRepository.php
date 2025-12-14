@@ -4,14 +4,16 @@ namespace App\Repositories;
 
 use App\Models\Inventory;
 use App\Models\Pharmacy;
+use App\Repositories\InventoryMovementRepository;
 
 class InventoryRepository
 {
     protected $model;
 
-    public function __construct(Inventory $inventory)
+    public function __construct(Inventory $inventory, InventoryMovementRepository $inventoryMovementRepo)
     {
         $this->model = $inventory;
+        $this->inventoryMovementRepo = $inventoryMovementRepo;
     }
 
 
@@ -42,9 +44,22 @@ class InventoryRepository
             ->where('pharmacy_id', $pharmacyId)
             ->firstOrFail();
 
-        $data['status'] = $this->calculateStatus($data);
+            if (isset($data['stock_quantity'])) {
+            $diff = $data['stock_quantity'] - $inventory->stock_quantity;
+            if ($diff !== 0) {
+                $this->inventoryMovementRepo->createMovement(
+                    $productId,
+                    $pharmacyId,
+                    $diff,
+                    'adjustment',
+                    'admin',
+                );
+            }
+        }
 
-        $inventory->update($data);
+        $data['status'] = $this->calculateStatus($data);
+        $inventory->fill($data);
+        $inventory->save();
 
         return $inventory->fresh();
     }
@@ -63,12 +78,19 @@ class InventoryRepository
         return 'normal';
     }
 
-
     public function getInventoryByPharmacy(int $pharmacyId)
     {
         return $this->model
             ->with('product.generic')
             ->where('pharmacy_id', $pharmacyId)
+            ->get();
+    }
+
+    public function getInventoryForTerminal(int $pharmacyId)
+    {
+        return $this->model
+            ->where('pharmacy_id', $pharmacyId)
+            ->select('id','product_id', 'pharmacy_id','stock_quantity', 'reorder_quantity', 'expiry_date', 'markup_percentage','selling_price', 'status')
             ->get();
     }
 
@@ -113,6 +135,5 @@ class InventoryRepository
             ->where('expiry_date', '<', now())
             ->get();
     }
-
 
 }
